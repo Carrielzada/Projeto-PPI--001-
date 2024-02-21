@@ -29,7 +29,7 @@ app.post('/login', (req, res)=>{
         res.redirect('/priv/ingresso.html')
     }
     else{
-        res.redirect('/a/login.html')
+        res.redirect('/login.html')
     }
 })
 
