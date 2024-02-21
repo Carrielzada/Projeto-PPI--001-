@@ -26,10 +26,10 @@ app.post('/login', (req, res)=>{
     const senha = req.body.senha;
     if (user && senha && user === 'Vitor' && senha === '123'){
         req.session.userlogg = true;
-        res.redirect('/priv/ingresso.html')
+        res.redirect('/priv/evento01.html')
     }
     else{
-        res.redirect('/login.html')
+        res.redirect('/a/login.html')
     }
 })
 
