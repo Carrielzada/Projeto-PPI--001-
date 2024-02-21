@@ -1,0 +1,22 @@
+{
+  "name": "primeiroprojetonode",
+  "version": "1.0.0",
+  "description": "primeiro projeto node da disciplina de Programação 1 para o curso de Análise e Desenvolvimento de Sistemas",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vitor Carriel",
+  "license": "ISC",
+  "keywords": [
+    "http",
+    "servidor",
+    "web"
+  ],
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-session": "^1.18.0"
+  }
+}
