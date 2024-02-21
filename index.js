@@ -4,7 +4,7 @@ import path from 'path';
 import session from 'express-session';
 import auth from './safe/auth.js';
 
-const host='0.0.0.0'; //O ip 0.0.0.0 representa todas interfaces de servidor
+const host='0.0.0.0'; //O ip 0.0.0.0 reprcesenta todas interfaces de servidor
 const porta = 3000; //Porta identifica um programa em execucao
 
 const app = express();
