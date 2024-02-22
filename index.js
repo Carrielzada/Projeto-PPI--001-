@@ -4,40 +4,39 @@ import path from 'path';
 import session from 'express-session';
 import auth from './safe/auth.js';
 
-const host='0.0.0.0'; //O ip 0.0.0.0 reprcesenta todas interfaces de servidor
-const porta = 3000; //Porta identifica um programa em execucao
+const host = '0.0.0.0'; // O ip 0.0.0.0 representa todas interfaces de servidor
+const porta = 3000; // Porta identifica um programa em execucao
 
 const app = express();
 
-app.use(express.urlencoded( { extended: true } ));//Permite o uso do req.body
+app.use(express.urlencoded({ extended: true })); // Permite o uso do req.body
 
-//Gerencie uma sessao, memoria entre server-user
-app.use(session({
-    secret: 'TESTE',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        maxAge: 60 * 1000 * 15
-    }
-}));
+// Gerencie uma sessao, memoria entre server-user
+app.use(
+    session({
+        secret: 'TESTE',
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            maxAge: 60 * 1000 * 15,
+        },
+    })
+);
 
-app.post('/login', (req, res)=>{
-    const user  = req.body.user;
+app.post('/login', (req, res) => {
+    const user = req.body.user;
     const senha = req.body.senha;
-    if (user && senha && user === 'Vitor' && senha === '123'){
+    if (user && senha && user === 'vitor' && senha === '123') {
         req.session.userlogg = true;
-        res.redirect('/priv/evento01.html')
+        res.redirect('./priv/evento01.html');
+    } else {
+        res.redirect('/login.html');
     }
-    else{
-        res.redirect('/a/login.html')
-    }
-})
+});
 
 app.use(express.static(path.join(process.cwd(), 'public')));
 app.use(auth, express.static(path.join(process.cwd(), 'priv')));
 
-app.use(express.static('./public'));
-
-app.listen(porta, host, ()=>{
+app.listen(porta, host, () => {
     console.log(`Servidor escutando em http://${host}:${porta}`);
-})
+});
