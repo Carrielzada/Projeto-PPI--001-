@@ -5,10 +5,14 @@ formularioEvento.onsubmit = validarFormulario;
 
 function validarFormulario(evento) {
   if (formularioEvento.checkValidity()) {
+    form.classList.remove('was-validated');
     cadastrarEvento();
   } else {
-    evento.preventDefault();
+    form.classList.add('was-validated'); //diz para o bootstrap exibis as mensagens de validação
   }
+evento.preventDefault(); //onsubmit deixa de ter o comportamento padrão
+evento.stopPropagation(); //Outros interessados no evento de submissão não saberão q ele aconteceu
+
 }
 
 function cadastrarEvento() {
