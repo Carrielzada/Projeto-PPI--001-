@@ -24,7 +24,7 @@
                     <h2 class="title">Cadastro de Eventos Deluxe's</h2>
                 </div>
                 <div class="card-body">
-                    <form id="formLogin" method="POST" action="/login">
+                    <form id="formEvento" method="POST" action="#" class="row g-3 need-validation" novalidate>
                         <div class="form-row m-b-55">
                             <div class="name">Nome Artístico\*</div>
                             <div class="value">
@@ -33,6 +33,9 @@
                                         <div class="input-group-desc">
                                             <input class="input--style-5" type="text" name="nome-artistico" required>
                                             <label class="label--desc">Nome Artístico</label>
+                                            <div class="invalid-feedback">
+                                                Por favor, informe o nome artístico.
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -43,6 +46,9 @@
                             <div class="value">
                                 <div class="input-group">
                                     <input class="input--style-5" type="text" name="endereco" required>
+                                    <div class="invalid-feedback">
+                                        Por favor, informe o endereço.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -51,6 +57,9 @@
                             <div class="value">
                                 <div class="input-group">
                                     <input class="input--style-5" type="text" name="cidade" required>
+                                    <div class="invalid-feedback">
+                                        Por favor, informe a cidade.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -59,6 +68,9 @@
                             <div class="value">
                                 <div class="input-group">
                                     <input class="input--style-5" type="text" name="estado" required>
+                                    <div class="invalid-feedback">
+                                        Por favor, informe o estado.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -67,30 +79,21 @@
                             <div class="value">
                                 <div class="input-group">
                                     <input class="input--style-5" type="text" name="preco" pattern="^(\d{1,3}(,\d{3})*|(\d+))(\.\d{2})?$" required>
+                                    <div class="invalid-feedback">
+                                        Por favor, informe o preço no formato correto.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <script>
-                            document.querySelector('[name="preco"]').addEventListener('input', function() {
-                                this.value = this.value.replace(/[^0-9,.]/g, ''); // Adicionei o modificador "g" para substituir todas as ocorrências.
-                                if (this.value.includes(',')) {
-                                    this.value = 'R$ ' + this.value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '.00';
-                                } else {
-                                    this.value = 'R$ ' + parseFloat(this.value).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                                }
-                            });
-                        </script>
-                        
+                        <script src="a/js/scriptLogin.js"></script>
                         <div class="form-row">
                             <div class="name">Quantidade de Ingressos\*</div>
                             <div class="value">
                                 <div class="input-group">
                                     <input class="input--style-5" type="text" name="quantidade-ingressos" pattern="\d+" required>
-                                    <script>
-                                        document.querySelector('[name="quantidade-ingressos"]').addEventListener('input', function() {
-                                            this.value = this.value.replace(/\D/g, '') + ' Unidades';
-                                        });
-                                    </script>
+                                    <div class="invalid-feedback">
+                                        Por favor, informe a quantidade de ingressos.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -100,8 +103,8 @@
             </div>
         </div>
     </div>
-    <script src="vendor/ppi/scriptLogin.js"></script>
     <!-- Main JS-->
     <script src="a/js/global.js"></script>
+    <script src="./scripts/scriptEvento.js"></script>
 </body>
 </html>

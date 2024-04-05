@@ -28,9 +28,9 @@ app.post('/login', (req, res) => {
     const senha = req.body.senha;
     if (user && senha && user === 'vitor' && senha === '123') {
         req.session.userlogg = true;
-        res.redirect('./priv/evento01.html');
+        res.redirect('/priv/cadastroEvento.html');
     } else {
-        res.redirect('/login.html');
+        res.redirect('/priv/cadastroEvento.html');
     }
 });
 

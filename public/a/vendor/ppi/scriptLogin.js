@@ -1,4 +1,4 @@
-const form = documento.getElementById('formLogin');
+const form = document.getElementById('formLogin');
 
 function validar(e) {
     if (form.checkValidity() === false) {
@@ -10,4 +10,4 @@ function validar(e) {
     }
 }
 
-form.addEventListener('submit, validar');
+form.addEventListener('submit', validar);

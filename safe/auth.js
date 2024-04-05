@@ -3,6 +3,6 @@ export default function auth(req, res, next){
         next()
     }
     else{
-        res.redirect('/login.html')
+        res.redirect('login.html')
     }
 }
