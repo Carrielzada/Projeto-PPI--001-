@@ -1,8 +1,8 @@
-export default function auth(req, res, next){
-    if (req.session?.userlog){
-        next()
+export default function auth(requisicao, resposta, next){
+    if (requisicao.session?.usuarioLogado){
+        next();
     }
     else{
-        res.redirect('login.html')
+        resposta.redirect('/login.html');
     }
 }
