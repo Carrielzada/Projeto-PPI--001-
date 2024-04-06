@@ -1,26 +1,26 @@
 const formularioEvento = document.getElementById('formEvento');
+formularioEvento.onsubmit = validarFormulario; //Apenas atribui a função, não chama ela
 
-// Cuidado para não chamar a função e sim atribuí-la ao método onsubmit
-formularioEvento.onsubmit = validarFormulario;
 
-function validarFormulario(evento) {
-  if (formularioEvento.checkValidity()) {
-    formularioEvento.classList.remove('was-validated');
-    const artista = document.getElementById("artista").value;
-    const endereco = document.getElementById("endereco").value;
-    const cidade = document.getElementById("cidade").value;
-    const estado = document.getElementById("estado").value;
-    const preco = document.getElementById("preco").value;
-    const qntdingresso = document.getElementById("qntdingresso").value;
 
-    const evento = {artista, endereco, cidade, estado, preco, qntdingresso};
+function validarFormulario(evento){
+    if (formularioEvento.checkValidity()){
+      formularioEvento.classList.remove( "was-validated" );
+      const artista = document.getElementById("artista").value;
+      const endereco = document.getElementById("endereco").value;
+      const cidade = document.getElementById("cidade").value;
+      const estado = document.getElementById("estado").value;
+      const preco = document.getElementById("preco").value;
+      const ingressos = document.getElementById("ingressos").value;  
+      
+      const evento = {artista, endereco, cidade, estado, preco, ingressos};
     cadastrarEvento(evento);
-  } else {
-    formularioEvento.classList.add('was-validated'); //diz para o bootstrap exibis as mensagens de validação
-  }
-evento.preventDefault(); //onsubmit deixa de ter o comportamento padrão
-evento.stopPropagation(); //Outros interessados no evento de submissão não saberão q ele aconteceu
-
+    }
+    else{
+        formularioEvento.classList.add( "was-validated"); //diz para o bootstrap exibir as msg de validação
+    }
+    evento.preventDefault(); //onsubmit deixa o comportamento
+    evento.stopPropagation(); // Outros interessados no evento não saberão.
 }
 
 function cadastrarEvento(evento) {
@@ -32,7 +32,8 @@ function cadastrarEvento(evento) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(evento)
-  }).then((resposta) => {
+  })
+  .then((resposta) => {
     return resposta.json();
   })
   .then((dados)=> {
@@ -42,19 +43,20 @@ function cadastrarEvento(evento) {
     else{
         mostrarMensagem(dados.mensagem, false);
     }
-  }).catch((erro)=>{
+  })
+  .catch((erro)=>{
       mostrarMensagem(erro.message, false);
   });
 }
 
-function mostrarMensagem(mensagem, erro = false){
+function mostrarMensagem(mensagem, sucesso = false){
   const divMensagem = document.getElementById('mensagem');
   if (sucesso){
       divMensagem.innerHTML=`
       <div class="alert alert-sucess" role="alert">
       ${mensagem}
       </div>
-      `; //String literals
+      `;
   }
   else{
       divMensagem.innerHTML = `

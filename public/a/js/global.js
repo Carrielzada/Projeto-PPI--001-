@@ -1,4 +1,4 @@
-(function ($) {
+/*(function ($) {
     'use strict';
 
     var selectSimple = $('.js-select-simple');
@@ -14,4 +14,4 @@
     });
 })(jQuery);
 
-const campos = document.querySelectorAll('input');
+const campos = document.querySelectorAll('input');*/

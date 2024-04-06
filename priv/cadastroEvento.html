@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <!-- Title Page-->
@@ -10,9 +11,6 @@
     <link href="a/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <!-- Font special for pages-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-    <!-- Vendor CSS-->
-    <link href="a/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="a/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
     <!-- Main CSS-->
     <link href="a/css/main.css" rel="stylesheet" media="all">
     <link href="a/css/buttons.css" rel="stylesheet" media="all">
@@ -25,7 +23,15 @@
                     <h2 class="title">Cadastro de Eventos Deluxe's</h2>
                 </div>
                 <div class="card-body">
-                    <form id="formEvento" method="POST" action="#" class="row g-3 need-validation" novalidate>
+                    <br/>
+                    <div id="mensagem">
+                
+                    </div>
+                    </br>
+                    <div id="espacoTabela">
+                
+                    </div>
+                    <form id="formEvento" method="POST" action="#" data-sb-form-api-toker="7dc0f19d-944e-488a-9ece-11cd016657b3" class="row g-3 needs-validation" novalidate>
                         <div class="form-row">
                             <div class="name">Nome Artístico*</div>
                             <div class="value">
@@ -33,7 +39,7 @@
                                     <div class="col">
                                         <div class="input-group-desc">
                                             <input class="input--style-5" type="text" id="artista" name="artista" required>
-                                            <label class="label--desc">Nome Artístico</label>
+                                            <div class="invalid-feedback" data-sb-feedback="message:required">Por favor, informe o nome artístico da banda/músico.</div>
                                         </div>
                                     </div>
                                 </div>
@@ -44,6 +50,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <input class="input--style-5" type="text" id="endereco" name="endereco" required>
+                                    <div class="invalid-feedback" data-sb-feedback="message:required">Por favor, informe o endereço.</div>
                                 </div>
                             </div>
                         </div>
@@ -52,6 +59,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <input class="input--style-5" type="text" id="cidade" name="cidade" required>
+                                    <div class="invalid-feedback" data-sb-feedback="message:required">Por favor, insira a cidade.</div>
                                 </div>
                             </div>
                         </div>
@@ -60,6 +68,7 @@
                             <div class="value">
                                 <div class="input-group">
                                     <input class="input--style-5" type="text" id="estado" name="estado" required>
+                                    <div class="invalid-feedback" data-sb-feedback="message:required">Por favor, informe o estado.</div>
                                 </div>
                             </div>
                         </div>
@@ -67,34 +76,33 @@
                             <div class="name">Preço *</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" id="preco" name="preco" pattern="^(\d{1,3}(,\d{3})*|(\d+))(\.\d{2})?$" required>
+                                    <input class="input--style-5" type="text" id="preco" name="preco" required>
+                                    <div class="invalid-feedback" data-sb-feedback="message:required">Por favor, informe o preço do seu evento.</div>
                                 </div>
                             </div>
                         </div>
-                        <script src="a/js/scriptLogin.js"></script>
                         <div class="form-row">
                             <div class="name">Quantidade de Ingressos *</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" id="qntdingresso" name="quantidade-ingressos" pattern="\d+" required>
+                                    <input class="input--style-5" type="text" id="ingressos" name="ingressos" pattern="\d+" required>
+                                    <div class="invalid-feedback" data-sb-feedback="message:required">Por favor, insira a quantidade de ingressos.</div>
                                 </div>
                             </div>
                         </div>
                         <div class="button-container">
-                            <button class="btn btn-blue" name="cadastrar" type="POST">Cadastrar</button>
-                            <button class="btn btn-yellow" name="atualizar" type="submit">Atualizar</button>
-                            <button class="btn btn-red" name="excluir" type="submit">Excluir</button>
-                            <button class="btn btn-gray btn-right" name="voltar" type="submit">Voltar</button>
+                            <button class="btn btn-blue" id="cadastrar" type="submit">Cadastrar</button>
+                            <button class="btn btn-yellow" id="atualizar" type="button" disabled>Atualizar</button>
+                            <button class="btn btn-red" id="excluir" type="button" disabled>Excluir</button>
+                            <button class="btn btn-gray btn-right" type="button" onclick="history.back()">Voltar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <div id="mensagem"></div>
-    <div id="espacoTabela"></div>
     <!-- Main JS-->
-    <script src="a/js/global.js"></script>
     <script src="./scripts/scriptEvento.js"></script>
+
 </body>
 </html>
