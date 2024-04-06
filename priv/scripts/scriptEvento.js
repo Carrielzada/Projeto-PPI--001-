@@ -54,7 +54,7 @@ function mostrarMensagem(mensagem, erro = false){
       <div class="alert alert-sucess" role="alert">
       ${mensagem}
       </div>
-      `; //String literals
+      `;
   }
   else{
       divMensagem.innerHTML = `
