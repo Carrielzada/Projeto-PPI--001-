@@ -5,16 +5,15 @@ import session from 'express-session';
 import auth from './safe/auth.js';
 
 const host = '0.0.0.0'; // O ip 0.0.0.0 representa todas interfaces de servidor
-const porta = 3000; // Porta identifica um programa em execucao
+const porta = 4000; // Porta identifica um programa em execucao
 
 const app = express();
 
-app.use(express.urlencoded({ extended: true })); // Permite o uso do req.body
+app.use(express.urlencoded({ extended: true })); // biblioteca qs
 
 // Gerencie uma sessao, memoria entre server-user
-app.use(
-    session({
-        secret: 'TESTE',
+app.use(session({
+        secret: 'SALAD@',
         resave: false,
         saveUninitialized: true,
         cookie: {
@@ -22,21 +21,23 @@ app.use(
         },
     })
 );
-
-app.post('/login', (req, res) => {
-    const user = req.body.user;
-    const senha = req.body.senha;
-    if (user && senha && user === 'vitor' && senha === '123') {
-        req.session.userlogg = true;
-        res.redirect('/cadastroEvento.html');
-    } else {
-        res.redirect('/cadastroEvento.html');
+app.post('/login', (requisicao, resposta)=>{
+    const usuario = requisicao.body.usuario;
+    const senha   = requisicao.body.senha;
+    if (usuario && senha && usuario === 'vitor' && senha === '123'){
+        requisicao.session.usuarioLogado = true;
+        resposta.redirect('/index.html');
     }
-});
+    else{
+        resposta.redirect('/login.html');
+    }
+})
 
+//O express oferece funcionalidades para permitir que conteúdo estático seja fornecido
 app.use(express.static(path.join(process.cwd(), 'public')));
+
 app.use(auth, express.static(path.join(process.cwd(), 'priv')));
 
-app.listen(porta, host, () => {
+app.listen(porta, host, ()=>{
     console.log(`Servidor escutando em http://${host}:${porta}`);
-});
+})

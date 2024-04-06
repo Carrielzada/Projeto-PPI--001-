@@ -1,0 +1,60 @@
+.btn {
+    text-transform: none;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.5rem; /* Aumentando o raio da borda */
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Adicionando sombreamento */
+    margin: 0 0.5rem; /* Aumentando o espaço entre os botões */
+}
+
+.btn-blue {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-yellow {
+    color: #212529;
+    background-color: #e4c35f;
+    border-color: #e9d391;
+}
+
+.btn-red {
+    color: #fff;
+    background-color: #d15864;
+    border-color: #dc8790;
+}
+
+.btn-gray {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn:hover {
+    opacity: 0.8;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175); /* Aumentando o sombreamento no hover */
+}
+
+.button-container {
+    display: inline-block;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-right {
+    margin-left: 60px; /* Movendo o botão de voltar para a direita */
+}
