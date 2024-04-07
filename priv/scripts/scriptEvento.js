@@ -1,6 +1,6 @@
 const formularioEvento = document.getElementById('formEvento');
 formularioEvento.onsubmit = validarFormulario; //Apenas atribui a função, não chama ela
-window.onload = buscarEventos;
+window.onload=buscarEvento;//Carrega os dados do evento
 document.getElementById("excluir").onclick = excluirEvento;
 document.getElementById("atualizar").onclick = atualizarEvento;
 
@@ -32,6 +32,19 @@ function validarFormulario(evento){
     }
 }
 
+function buscarEvento() {
+  fetch('http://localhost:3000/evento', { method: 'GET' })
+    .then((resposta) => resposta.json())
+    .then((dados) => {
+      if (Array.isArray(dados)) {
+        exibirTabelaEventos(dados);
+      } else {
+        mostrarMensagem(dados.mensagem, false);
+      }
+    })
+    .catch((erro) => mostrarMensagem(erro.message, false));
+}
+
 function cadastrarEvento(evento) {
   // Lembrando que o nosso backend responde requisições HTTP - GET/POST/PUT/PATCH/DELETE
   // FETCH API para fazer requisições em HTTP
@@ -44,25 +57,22 @@ function cadastrarEvento(evento) {
   .then((dados) => {
     if (dados.status) {
       mostrarMensagem(dados.mensagem, true);
-      buscarEventos();
+      buscarEvento();
+      limparFormulario();
     } else {
       mostrarMensagem(dados.mensagem, false);
     }
   })
   .catch((erro) => mostrarMensagem(erro.message, false));
 }
-
-function buscarEventos() {
-  fetch('http://localhost:3000/evento', { method: 'GET' })
-    .then((resposta) => resposta.json())
-    .then((dados) => {
-      if (Array.isArray(dados)) {
-        exibirTabelaEventos(dados);
-      } else {
-        mostrarMensagem(dados.mensagem, false);
-      }
-    })
-    .catch((erro) => mostrarMensagem(erro.message, false));
+function limparFormulario() {
+  document.getElementById('codigo').value = '';
+  document.getElementById('artista').value = '';
+  document.getElementById('endereco').value = '';
+  document.getElementById('cidade').value = '';
+  document.getElementById('estado').value = '';
+  document.getElementById('preco').value = '';
+  document.getElementById('ingressos').value = '';
 }
 
 function mostrarMensagem(mensagem, sucesso = false){
@@ -91,17 +101,18 @@ function exibirTabelaEventos(listaEventos) {
   espacoTabela.innerHTML = '';
   if (listaEventos.length > 0) {
     const tabela = document.createElement('table');
-    tabela.className ='table table-dark table-stripped';
+    tabela.className = 'table table-striped table-hover';
     const cabecalho = document.createElement('thead');
     cabecalho.innerHTML = `
       <tr>
-          <th>Codigo</th>
+          <th>#</th>
           <th>Artista</th>
-          <th>Endereco</th>
+          <th>Endereço</th>
           <th>Cidade</th>
           <th>Estado</th>
           <th>Preco</th>
           <th>Ingressos</th>
+          <th>Ações</th>
       </tr>
     `;
   tabela.appendChild(cabecalho);
@@ -118,28 +129,21 @@ function exibirTabelaEventos(listaEventos) {
     <td>${evento.preco}</td>
     <td>${evento.ingressos}</td>
     <td>
-    <button onclick="selecionarEvento('${evento.codigo}',
-    '${evento.artista}',
-    '${evento.endereco}',
-    '${evento.cidade}',
-    '${evento.estado}',
-    '${evento.preco}',
-    '${evento.ingressos}')">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
-                    </svg>
-                </button>
-             </td>`;
+        <button onclick="selecionarEvento('${evento.codigo}','${evento.artista}','${evento.endereco}','${evento.cidade}','${evento.estado}','${evento.preco}','${evento.ingressos}')">      
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+          </svg>
+        </button>
+    </td>`;
       corpo.appendChild(linha);
     }
     tabela.appendChild(corpo);
-    espacoTabela.appendChild(tabela);  
+    espacoTabela.appendChild(tabela);
   }
     else {
       espacoTabela.innerHTML = '<p>Nenhum evento foi encontrado!</p>';
     }
 }
-
 function selecionarEvento(codigo, artista, endereco, cidade, estado, preco, ingressos){
   document.getElementById('codigo').value = codigo;
   document.getElementById('artista').value = artista;
@@ -154,6 +158,7 @@ function atualizarEvento() {
   const codigo = document.getElementById('codigo').value;
   if (confirm("Confirma atualização do Evento?")) {
     const evento = obterEventoDoFormulario('atualizacao');
+    limparFormulario();
     if (evento) {
       fetch(`http://localhost:3000/evento/${codigo}`, {
         method: 'PUT',
@@ -177,7 +182,7 @@ function atualizarEvento() {
         } else {
           mostrarMensagem("Ocorreu um erro ao processar a solicitação.", false);
         }
-        buscarEventos();
+        buscarEvento();
       })
       .catch((erro) => {
         mostrarMensagem(erro.message, false);
@@ -209,7 +214,7 @@ function excluirEvento() {
       } else {
         mostrarMensagem("Ocorreu um erro ao processar a solicitação.", false);
       }
-      buscarEventos();
+      buscarEvento();
     })
     .catch((erro) => {
       mostrarMensagem(erro.message, false);
