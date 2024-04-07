@@ -31,17 +31,22 @@
                     <div id="espacoTabela">
                 
                     </div>
-                    <form id="formEvento" method="POST" action="#" data-sb-form-api-toker="7dc0f19d-944e-488a-9ece-11cd016657b3" class="row g-3 needs-validation" novalidate>
+                    <form id="formEvento" method="POST" action="#" class="row g-3 needs-validation" novalidate>
+                        <div class="form-row">
+                            <div class="name">Código</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text" id="codigo" name="codigo">
+                                    <div class="invalid-feedback" data-sb-feedback="message:required">Por favor, insira um código.</div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="name">Nome Artístico*</div>
                             <div class="value">
-                                <div class="row row-space">
-                                    <div class="col">
-                                        <div class="input-group-desc">
-                                            <input class="input--style-5" type="text" id="artista" name="artista" required>
-                                            <div class="invalid-feedback" data-sb-feedback="message:required">Por favor, informe o nome artístico da banda/músico.</div>
-                                        </div>
-                                    </div>
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text" id="artista" name="artista" required>
+                                    <div class="invalid-feedback" data-sb-feedback="message:required">Por favor, informe o nome artístico.</div>
                                 </div>
                             </div>
                         </div>
@@ -92,8 +97,8 @@
                         </div>
                         <div class="button-container">
                             <button class="btn btn-blue" id="cadastrar" type="submit">Cadastrar</button>
-                            <button class="btn btn-yellow" id="atualizar" type="button" disabled>Atualizar</button>
-                            <button class="btn btn-red" id="excluir" type="button" disabled>Excluir</button>
+                            <button class="btn btn-yellow" id="atualizar" type="button" >Atualizar</button>
+                            <button class="btn btn-red" id="excluir" type="button" >Excluir</button>
                             <button class="btn btn-gray btn-right" type="button" onclick="history.back()">Voltar</button>
                         </div>
                     </form>
